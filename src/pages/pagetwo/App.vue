@@ -1,10 +1,10 @@
 <script setup>
-import TheWelcome from "../../components/TheWelcome.vue";
+import HelloWorld from "../../components/HelloWorld.vue";
 </script>
 
 <template>
   <main>
     this is pagetwo
-    <TheWelcome />
+    <HelloWorld />
   </main>
 </template>
