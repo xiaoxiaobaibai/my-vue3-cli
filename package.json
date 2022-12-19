@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --mode test",
+    "release": "vite build --mode release",
+    "prod": "vite build --mode production",
     "preview": "vite preview",
     "clean:cache": "npm cache clear --force",
     "clean:lib": "rimraf node_modules",

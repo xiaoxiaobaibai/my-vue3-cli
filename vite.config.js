@@ -22,13 +22,11 @@ Object.keys(entrys).forEach((pageName) => {
   );
 });
 
-console.log(123456, project_pages)
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   let pages = {};
   const env = loadEnv(mode, process.cwd());
   pages = { ...project_pages };
-
   return {
     root: env.VITE_APP_ROOTPATH,
     plugins: [
@@ -56,9 +54,23 @@ export default defineConfig(({ command, mode }) => {
       proxy: {},
     },
     build: {
+      target: 'modules',
+      minify: 'terser',
+      outDir: resolve(__dirname, 'dist'),
+      assetsDir: 'assets',
       rollupOptions: {
         input: pages,
-        output: { dir: "./dist" },
+        // output: { dir: "./dist" },
+        output: {
+          chunkFileNames: 'js/[name]-[hash].js',
+          entryFileNames: 'js/[name]-[hash].js',
+          assetFileNames: '[ext]/[name]-[hash].[ext]',
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString();
+            }
+          }
+        }
       },
       terserOptions: {
         compress: {
