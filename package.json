@@ -5,11 +5,13 @@
     "dev": "vite",
     "build": "vite build --mode test",
     "release": "vite build --mode release",
-    "prod": "vite build --mode production",
+    "prod": "vite build --mode prod",
     "preview": "vite preview",
     "clean:cache": "npm cache clear --force",
     "clean:lib": "rimraf node_modules",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint:create": "eslint --init",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .eslintrcignore",
+    "prettier-format": "prettier --config .prettierrc.cjs . --ext .vue,.js,.jsx,.cjs,.mjs --write --ignore-path .prettierignore"
   },
   "dependencies": {
     "pinia": "^2.0.23",
@@ -18,13 +20,24 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
-    "@typescript-eslint/parser": "^5.46.1",
+    "@types/eslint": "^8.4.10",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
     "@vitejs/plugin-vue": "^3.1.2",
     "@vue/eslint-config-prettier": "^7.0.0",
-    "eslint": "^8.22.0",
-    "eslint-plugin-vue": "^9.3.0",
-    "prettier": "^2.7.1",
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.8.0",
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.4",
     "vite": "^3.1.8",
-    "vite-plugin-compression": "^0.5.1"
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-eslint": "^1.8.1",
+    "vue-eslint-parser": "^9.1.0"
   }
 }

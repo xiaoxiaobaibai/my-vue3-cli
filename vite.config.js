@@ -1,55 +1,58 @@
-import { defineConfig, loadEnv } from "vite";
-import vue from "@vitejs/plugin-vue";
-import { resolve, join, dirname } from "path";
-import { readdirSync } from "fs";
-import viteCompression from "vite-plugin-compression";
-import { fileURLToPath, URL } from "node:url";
+import { defineConfig, loadEnv } from 'vite'
+import eslintPlugin from 'vite-plugin-eslint'
+import vue from '@vitejs/plugin-vue'
+import { resolve, join, dirname } from 'path'
+import { readdirSync } from 'fs'
+import viteCompression from 'vite-plugin-compression'
+import { fileURLToPath, URL } from 'node:url'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
-const project_pages = {};
-const entryPath = resolve(__dirname, "./src/pages");
-const entrys = readdirSync(entryPath).reduce((obj, dirname) => {
-  obj[dirname] = join(entryPath, dirname);
-  return obj;
-}, {});
+const projectPages = {}
+const entryPath = resolve(__dirname, './src/pages')
+const entrys = readdirSync(entryPath).reduce((obj, dirName) => {
+  obj[dirName] = join(entryPath, dirName)
+  return obj
+}, {})
 
 Object.keys(entrys).forEach((pageName) => {
-  project_pages[pageName] = resolve(
+  projectPages[pageName] = resolve(
     __dirname,
     `src/pages/${pageName}/index.html`
-  );
-});
+  )
+})
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
-  let pages = {};
-  const env = loadEnv(mode, process.cwd());
-  pages = { ...project_pages };
+  console.log(command)
+  let pages = {}
+  const env = loadEnv(mode, process.cwd())
+  pages = { ...projectPages }
   return {
     root: env.VITE_APP_ROOTPATH,
     plugins: [
       vue(),
+      eslintPlugin(),
       // gzip压缩 生产环境生成 .gz 文件
       viteCompression({
         verbose: true,
         disable: false,
         threshold: 10240,
-        algorithm: "gzip",
-        ext: ".gz",
+        algorithm: 'gzip',
+        ext: '.gz',
       }),
     ],
     resolve: {
-      extensions: [".js", ".ts", ".vue", ".json"],
+      extensions: ['.js', '.ts', '.vue', '.json'],
       alias: {
-        "@": fileURLToPath(new URL("./src", import.meta.url)),
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
     server: {
-      host: "localhost",
+      host: 'localhost',
       port: 5238,
-      open: false,
+      open: true,
       https: false,
       proxy: {},
     },
@@ -67,10 +70,14 @@ export default defineConfig(({ command, mode }) => {
           assetFileNames: '[ext]/[name]-[hash].[ext]',
           manualChunks(id) {
             if (id.includes('node_modules')) {
-              return id.toString().split('node_modules/')[1].split('/')[0].toString();
+              return id
+                .toString()
+                .split('node_modules/')[1]
+                .split('/')[0]
+                .toString()
             }
-          }
-        }
+          },
+        },
       },
       terserOptions: {
         compress: {
@@ -79,5 +86,5 @@ export default defineConfig(({ command, mode }) => {
         },
       },
     },
-  };
-});
+  }
+})
