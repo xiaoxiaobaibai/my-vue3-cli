@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "clean:cache": "npm cache clear --force",
     "clean:lib": "rimraf node_modules",
+    "prepare": "husky install",
     "lint:create": "eslint --init",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .eslintrcignore",
     "prettier-format": "prettier --config .prettierrc.cjs . --ext .vue,.js,.jsx,.cjs,.mjs --write --ignore-path .prettierignore"
@@ -33,11 +34,19 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.8.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
     "prettier": "^2.8.1",
     "typescript": "^4.9.4",
     "vite": "^3.1.8",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-eslint": "^1.8.1",
     "vue-eslint-parser": "^9.1.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "npm run lint",
+      "npm run prettier-format"
+    ]
   }
 }
