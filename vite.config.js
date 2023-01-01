@@ -1,5 +1,6 @@
-import { defineConfig, loadEnv } from 'vite'
 import eslintPlugin from 'vite-plugin-eslint'
+import StylelintPlugin from 'vite-plugin-stylelint'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve, join, dirname } from 'path'
 import { readdirSync } from 'fs'
@@ -34,6 +35,7 @@ export default defineConfig(({ command, mode }) => {
     plugins: [
       vue(),
       eslintPlugin(),
+      StylelintPlugin({ fix: true }),
       // gzip压缩 生产环境生成 .gz 文件
       viteCompression({
         verbose: true,
@@ -76,6 +78,7 @@ export default defineConfig(({ command, mode }) => {
                 .split('/')[0]
                 .toString()
             }
+            return id
           },
         },
       },
