@@ -54,5 +54,6 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-param-reassign': 0,
+    'consistent-return': ['error', { treatUndefinedAsUnspecified: false }]
   },
 }

@@ -15,8 +15,8 @@ module.exports = {
         'style', // 格式（不影响代码运行的变动）
         'revert', // 撤销 commit，回滚到上一个版本
         'perf', // 性能优化
-        'test' // 测试（单元、集成测试）
-      ]
+        'test', // 测试（单元、集成测试）
+      ],
     ],
     'type-case': [0],
     'type-empty': [0],
@@ -24,6 +24,6 @@ module.exports = {
     'scope-case': [0],
     'subject-full-stop': [0, 'never'],
     'subject-case': [0, 'never'],
-    'header-max-length': [0, 'always', 72]
-  }
+    'header-max-length': [0, 'always', 72],
+  },
 }

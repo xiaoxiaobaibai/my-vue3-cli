@@ -78,7 +78,7 @@ export default defineConfig(({ command, mode }) => {
                 .split('/')[0]
                 .toString()
             }
-            return id
+            return 'other'
           },
         },
       },
