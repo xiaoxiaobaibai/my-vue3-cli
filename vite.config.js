@@ -7,6 +7,8 @@ import { readdirSync } from 'fs'
 import viteCompression from 'vite-plugin-compression'
 import { fileURLToPath, URL } from 'node:url'
 
+import { loadEnv as myLoadEnv } from './utils/loadEnv.ts'
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -28,7 +30,9 @@ Object.keys(entrys).forEach((pageName) => {
 export default defineConfig(({ command, mode }) => {
   console.log(command)
   let pages = {}
-  const env = loadEnv(mode, process.cwd())
+  const env = loadEnv(mode, process.cwd()) || {}
+  console.log(111, env)
+  myLoadEnv(mode)
   pages = { ...projectPages }
   return {
     root: env.VITE_APP_ROOTPATH,

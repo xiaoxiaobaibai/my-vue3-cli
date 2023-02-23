@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --mode test",
-    "release": "vite build --mode release",
-    "prod": "vite build --mode prod",
+    "build:test": "vite build --mode test",
+    "build:release": "vite build --mode release",
+    "build": "vite build --mode prod",
     "preview": "vite preview",
     "clean:cache": "npm cache clear --force",
     "clean:lib": "rimraf node_modules",
@@ -13,7 +13,7 @@
     "lint:create": "eslint --init",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .eslintrcignore",
     "prettier-format": "prettier --config .prettierrc.cjs . --ext .vue,.js,.jsx,.cjs,.mjs --write --ignore-path .prettierignore",
-    "lint:css": "stylelint **/*.{vue,css,sass,scss,less} --fix"
+    "lint:css": "stylelint **/*.{vue,css,scss,less} --fix"
   },
   "dependencies": {
     "pinia": "^2.0.23",
@@ -30,6 +30,7 @@
     "@typescript-eslint/parser": "^5.47.1",
     "@vitejs/plugin-vue": "^3.1.2",
     "@vue/eslint-config-prettier": "^7.0.0",
+    "dotenv": "^16.0.3",
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
@@ -42,6 +43,7 @@
     "postcss": "^8.4.20",
     "postcss-html": "^1.5.0",
     "prettier": "^2.8.1",
+    "sass": "^1.57.1",
     "stylelint": "^14.16.1",
     "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-config-standard": "^29.0.0",
@@ -58,7 +60,7 @@
       "npm run lint",
       "npm run prettier-format"
     ],
-    "*.{vue,less,css,sass}": [
+    "*.{vue,less,css,scss}": [
       "npm run lint:css"
     ]
   }
